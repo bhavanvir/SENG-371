@@ -1,2 +1,1 @@
-# SENG-371
-SPRING 2023
+# SENG 371: Software Evolution
