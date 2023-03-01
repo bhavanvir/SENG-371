@@ -4,27 +4,52 @@
         <title>Emergency Room Flow Manager</title>
         <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css">
+        <style>
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                right: 0;
+                border: 1px solid black;
+            }
+            #panel {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 50%;
+                border: 1px solid black;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
-        <div id="map" style="height: 400px; width: 100%;">
-            <script>
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var lon = position.coords.longitude;
-                    var lat = position.coords.latitude;
-                    var map = new ol.Map({
-                        target: 'map',
-                        layers: [
+        <div id="map"></div>
+        <div id="panel">
+            <!-- Write your content here -->
+        </div>
+        <script>
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lon = position.coords.longitude;
+                var lat = position.coords.latitude;
+                var map = new ol.Map({
+                    target: 'map',
+                    layers: [
                         new ol.layer.Tile({
                             source: new ol.source.OSM()
                         })
-                        ],
-                        view: new ol.View({
+                    ],
+                    view: new ol.View({
                         center: ol.proj.fromLonLat([lon, lat]),
                         zoom: 15
-                        })
-                    });
+                    })
                 });
-            </script>
-        </div>
+            });
+        </script>
     </body>
 </html>
