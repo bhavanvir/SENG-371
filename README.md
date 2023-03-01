@@ -18,5 +18,5 @@ Start the virtual environment
 $ python -m pipenv shell
 
 Run the local server
-$ python managerserver.py runserver
+$ python manage.py runserver
 ```
