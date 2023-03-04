@@ -13,9 +13,8 @@
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                left: 30%;
+                left: 0%;
                 right: 0;
-                border: 1px solid black;
             }
             #panel {
                 position: absolute;
@@ -23,7 +22,7 @@
                 bottom: 0;
                 left: 0;
                 width: 30%;
-                border: 1px solid black;
+                padding: 10px;
             }
             body {
                 margin: 0;
@@ -35,12 +34,9 @@
     <body>
         <div id="map"></div>
         <div id="panel">
-            <!-- Write your content here -->
-            <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </h1>
+            {% block content %}
+            {% include 'hospital_list.html' %}
+            {% endblock content %}
         </div>
         <script>
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -48,6 +44,7 @@
                 var lat = position.coords.latitude;
                 var map = new ol.Map({
                     target: 'map',
+                    controls: [],
                     layers: [
                         new ol.layer.Tile({
                             source: new ol.source.OSM()

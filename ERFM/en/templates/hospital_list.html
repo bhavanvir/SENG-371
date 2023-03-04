@@ -1,0 +1,19 @@
+{% extends 'en.html' %}
+
+{% block content %}
+<div class="card" style="width: 25rem;">
+    <ul class="list-group list-group-flush">
+        {% for hospital in hospitals %}
+            <li class="list-group-item hospital-name">{{ hospital.name }} ({{ hospital.lat }}, {{ hospital.lon }})</li>
+        {% empty %}
+            <li class="list-group item">No hospitals</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+    .hospital-name {
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
