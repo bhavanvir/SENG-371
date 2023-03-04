@@ -8,15 +8,18 @@ Introduces problems and solutions of long-term software maintenance/evolution an
 
 ## Installation 
 ```
-Clone the repository 
+Using the package manager pip to install all external modules:
+$ pip install -r requirements.txt
+
+Clone the repository :
 $ git clone https://github.com/bhavanvir/SENG-371
 
-Navigate to the ERFM folder
+Navigate to the ERFM folder:
 $ cd ERFM
 
-Start the virtual environment
+Start the virtual environment:
 $ python -m pipenv shell
 
-Run the local server
+Run the local server:
 $ python manage.py runserver
 ```
