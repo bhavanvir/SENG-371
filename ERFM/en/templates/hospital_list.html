@@ -1,12 +1,12 @@
 {% extends 'en.html' %}
 
 {% block content %}
-<div class="card" style="width: 25rem;">
+<div class="card" style="width: 22rem;">
     <ul class="list-group list-group-flush">
         {% for hospital in hospitals %}
-            <li class="list-group-item hospital-name">{{ hospital.name }} ({{ hospital.lat }}, {{ hospital.lon }})</li>
+            <li class="list-group-item hospital-name">{{ hospital.name }} <br> <b>{{ hospital.dist }} km</b></li>
         {% empty %}
-            <li class="list-group item">No hospitals</li>
+            <li class="list-group-item hospital-name bg-success">Found hospitals! Now calculating distances...</li>
         {% endfor %}
     </ul>
 </div>

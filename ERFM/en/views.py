@@ -4,6 +4,18 @@ from django.http import HttpResponse
 import overpy
 import numpy as np
 
+def Haversine(lon_1, lat_1, lon_2, lat_2):
+    """
+    This function calculates the distance between two points on the Earth's surface, given their latitude and longitude.
+    """
+    lon_1, lat_1, lon_2, lat_2 = map(np.radians, [lon_1, lat_1, lon_2, lat_2])
+    dlon = lon_2 - lon_1
+    dlat = lat_2 - lat_1
+    a = np.sin(dlat/2.0)**2 + np.cos(lat_1) * np.cos(lat_2) * np.sin(dlon/2.0)**2
+    c = 2 * np.arcsin(np.sqrt(a))
+    km = 6367 * c
+    return round(km, 1)
+
 """
 This function queries for hospitals in the Vancouver Island area using the Overpass API, 
 and then processes the results to obtain the name, longitude and latitude of each hospital. 
@@ -11,6 +23,10 @@ It then creates a list of dictionaries with this information, and passes it as a
 to the hospital_list.html template, which will display the hospital names and their locations on a map.
 """
 def hospital_list(request):
+    lon = request.GET.get('lon')
+    lat = request.GET.get('lat')
+
+
     api = overpy.Overpass()
     result = api.query("""
                         [out:json];
@@ -34,9 +50,14 @@ def hospital_list(request):
     output = []
     for k, v in unfiltered.items():
         mean = np.mean(v, axis=0)
-        output.append({"name": k, "lon": mean[0], "lat": mean[1]})
-        
-    context = {"hospitals": output}
+        if lon != None and lat != None:
+            lon = np.float64(lon)
+            lat = np.float64(lat)
+            distance = Haversine(lon, lat, mean[0], mean[1])
+            output.append({"name": k, "dist": distance})
+
+    sorted_output = sorted(output, key=lambda k: k['dist'])
+    context = {"hospitals": sorted_output}
 
     return render(request, 'hospital_list.html', context)
 
