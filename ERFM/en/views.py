@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 import overpy
 import numpy as np
+import time
 
 def Haversine(lon_1, lat_1, lon_2, lat_2):
     """
@@ -28,16 +29,21 @@ def hospital_list(request):
 
 
     api = overpy.Overpass()
-    result = api.query("""
-                        [out:json];
-                        area["name"="Vancouver Island"]->.boundaryarea;
-                        (
-                            node["amenity"="hospital"](area.boundaryarea);
-                            way["amenity"="hospital"](area.boundaryarea);
-                            relation["amenity"="hospital"](area.boundaryarea);
-                        );
-                        out center;
-                        """)
+    try:
+        result = api.query("""
+                            [out:json];
+                            area["name"="Vancouver Island"]->.boundaryarea;
+                            (
+                                node["amenity"="hospital"](area.boundaryarea);
+                                way["amenity"="hospital"](area.boundaryarea);
+                                relation["amenity"="hospital"](area.boundaryarea);
+                            );
+                            out center;
+                            """)
+    except overpy.exception.OverpassTooManyRequests:
+        time.sleep(30)
+        return hospital_list(request)
+    
     unfiltered = {}
     for way in result.get_ways():
         nodes = way.get_nodes(resolve_missing=True)
