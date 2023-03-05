@@ -1,9 +1,7 @@
-from django.test import TestCase
-from selenium import webdriver
-import unittest
-import selenium
+import pytest
 
 
+@pytest.mark.usefixtures("setup")
 
 # Create your tests here.
 
