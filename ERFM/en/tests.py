@@ -1,9 +1,7 @@
 import pytest
-import unittest
-
-@pytest.mark.usefixtures("setup")
 
 # Create your tests here.
+@pytest.mark.usefixtures("setup")
 class tests(unittest.TestCase):
 
     def test_page_title_check(self):
