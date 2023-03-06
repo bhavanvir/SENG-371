@@ -4,10 +4,6 @@ import pytest
 @pytest.mark.usefixtures("setup")
 
 # Create your tests here.
-
-if __name__ == '__main__':
-    unittest.main()
-
 class tests(unittest.TestCase):
 
     def test_page_title_check(self):
