@@ -34,6 +34,5 @@ jobs:
         sudo dpkg -i google-chrome-stable_current_amd64.deb
     - name: Run Tests
       run: |
-        cd ERFM
-        python ./manage.py runserver
+        cd ERFM/
         python ./manage.py test
