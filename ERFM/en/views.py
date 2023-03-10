@@ -60,7 +60,7 @@ def hospital_list(request):
             lon = np.float64(lon)
             lat = np.float64(lat)
             distance = Haversine(lon, lat, mean[0], mean[1])
-            output.append({"name": k, "dist": distance})
+            output.append({"name": k, "dist": distance, "lon": lon, "lat": lat})
 
     sorted_output = sorted(output, key=lambda k: k['dist'])
     context = {"hospitals": sorted_output}

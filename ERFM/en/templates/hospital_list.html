@@ -1,12 +1,12 @@
 {% extends 'en.html' %}
 
 {% block content %}
-<div class="card" style="width: 22rem;">
-    <ul class="list-group list-group-flush">
+<div class="card" style="width: 22rem; height: calc(100% - 10px);">
+    <ul class="list-group list-group-flush h-100" style="overflow-y: scroll;">
         {% for hospital in hospitals %}
             <li class="list-group-item hospital-name">{{ hospital.name }} <br> <b>{{ hospital.dist }} km</b></li>
         {% empty %}
-            <li class="list-group-item hospital-name bg-success">Found hospitals! Now calculating distances...</li>
+            <li class="list-group-item hospital-name d-flex align-items-center justify-content-center h-100">Loading...</li>
         {% endfor %}
     </ul>
 </div>
