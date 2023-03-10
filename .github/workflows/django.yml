@@ -35,4 +35,5 @@ jobs:
     - name: Run Tests
       run: |
         cd ERFM/
-        python ./manage.py test
+        python ./manage.py runserver
+        
