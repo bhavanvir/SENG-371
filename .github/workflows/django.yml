@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.9]
 
     steps:
     - uses: actions/checkout@v3
@@ -34,6 +34,7 @@ jobs:
         sudo dpkg -i google-chrome-stable_current_amd64.deb
     - name: Run Tests
       run: |
-        cd ERFM
+        cd ERFM/
         python ./manage.py runserver
         python ./manage.py test
+        
