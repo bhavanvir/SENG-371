@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9]
+        python-version: [3.10.1]
 
     steps:
     - uses: actions/checkout@v3
@@ -35,6 +35,4 @@ jobs:
     - name: Run Tests
       run: |
         cd ERFM/
-        python ./manage.py runserver
         python ./manage.py test
-        

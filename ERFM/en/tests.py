@@ -1,5 +1,5 @@
 import pytest
-from django.test import TestCase
+from django.test import Client, TestCase
 from selenium import webdriver
 import unittest
 import selenium
@@ -12,13 +12,13 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 
 # Create your tests here.
 @pytest.mark.usefixtures("setup")
-class tests(unittest.TestCase):
+class TestPageTitle(TestCase):
+    def setUp(self):
+        self.client = Client()
 
-    def test_page_title_check(self):
-
-        chrome_driver = webdriver.Chrome('/home/<user>/chromedriver',chrome_options=chrome_options)
-        chrome_driver.get("http://127.0.0.1:8000/")
-        first_value = chrome_driver.title
-        second_value = "Emergency Room Flow Manager"
-        self.assertEquals(first_value,second_value)
-
+    def test_page_title(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Emergency Room Flow Manager")
+        content = str(response.content, 'utf-8')
+        self.assertIn('<title>Emergency Room Flow Manager</title>', content)
