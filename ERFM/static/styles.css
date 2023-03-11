@@ -1,4 +1,4 @@
-/* References: en.html */
+/* Located in the following file: en.html */
 #map {
     position: absolute;
     top: 0;
@@ -8,20 +8,18 @@
 }
 
 #panel {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    position: fixed;
+    top: 5px;
+    left: 5px;
     width: 30%;
-    padding: 10px;
 }
-.body {
+
+body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 12px;
 }
 
-/* References: hospital_list.html */
-.hospital-name {
-    font-size: 14px;
-}
+/* Located in the following file: hospital_list.html */

@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
 {% block content %}
-<div class="card " style="width: 22rem;">
-    <ul class="list-group list-group-flush " style="max-height: calc(100vh - 10px); overflow-y: auto;">
+<div class="card" style="width: 22rem;">
+    <ul class="list-group list-group-flush" style="max-height: calc(100vh - 10px); overflow-y: auto;">
         {% for hospital in hospitals %}
-            <li class="list-group-item hospital-name ">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
+            <li class="list-group-item">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
         {% empty %}
-            <li class="list-group-item hospital-name d-flex align-items-center justify-content-center ">Loading...</li>
+            <li class="list-group-item d-flex align-items-center justify-content-center ">Loading...</li>
         {% endfor %}
     </ul>
 </div>
