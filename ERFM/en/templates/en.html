@@ -8,46 +8,8 @@
         <title>Emergency Room Flow Manager</title>
         <script src="https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css">
-        <script>
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lon = position.coords.longitude;
-                var lat = position.coords.latitude;
-
-                // Send the latitude and longitude values to a view function in your Django application using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', '?lon=' + lon + '&lat=' + lat, true);
-                xhr.onload = function() {
-                    // Display the hospital list returned by the server
-                    var panel = document.getElementById('panel');
-                    panel.innerHTML = xhr.responseText;
-                };
-                xhr.send();
-                
-                initializeMap(lon, lat);
-            });
-        </script>
-        <style>
-            #map {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0%;
-                right: 0;
-            }
-            #panel {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                width: 30%;
-                padding: 10px;
-            }
-            body {
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-            }
-        </style>
+        <script src="{% static 'location.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
         <div id="map"></div>
@@ -56,42 +18,6 @@
             {% include 'hospital_list.html' %}
             {% endblock content %}
         </div>
-        <script>
-            function initializeMap(lon, lat) {
-                var map = new ol.Map({
-                    target: 'map',
-                    controls: [],
-                    layers: [
-                        new ol.layer.Tile({
-                            source: new ol.source.OSM()
-                        })
-                    ],
-                    view: new ol.View({
-                        center: ol.proj.fromLonLat([lon, lat]),
-                        zoom: 17
-                    })
-                });
-
-                // Add a marker to the map
-                var marker = new ol.Feature({
-                    geometry: new ol.geom.Point(
-                        ol.proj.fromLonLat([lon, lat])
-                    )
-                });
-                
-                var markerLayer = new ol.layer.Vector({
-                    source: new ol.source.Vector({
-                        features: [marker]
-                    }),
-                    style: new ol.style.Style({
-                        image: new ol.style.Icon({
-                            src: 'https://openlayers.org/en/latest/examples/data/geolocation_marker.png'
-                        })
-                    }),
-                });
-                
-                map.addLayer(markerLayer);
-            }
-        </script>
+        <script src="{% static 'map.js' %}"></script>
     </body>
 </html>
