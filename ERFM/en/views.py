@@ -5,10 +5,11 @@ import overpy
 import numpy as np
 import time
 
-def Haversine(lon_1, lat_1, lon_2, lat_2):
-    """
-    This function calculates the distance between two points on the Earth's surface, given their latitude and longitude.
-    """
+"""
+This function calculates the distance between two points on the Earth's surface, given their latitude 
+and longitude.
+"""
+def haversine(lon_1, lat_1, lon_2, lat_2):
     lon_1, lat_1, lon_2, lat_2 = map(np.radians, [lon_1, lat_1, lon_2, lat_2])
     dlon = lon_2 - lon_1
     dlat = lat_2 - lat_1
@@ -47,20 +48,24 @@ def hospital_list(request):
     unfiltered = {}
     for way in result.get_ways():
         nodes = way.get_nodes(resolve_missing=True)
-        nodelist=[]
-        if way.tags.get("name", "n/a") != "n/a":
+        nodelist = []
+
+        name = way.tags.get("name", "n/a")
+        street = way.tags.get("addr:street", "n/a")
+        if name != "n/a" and street != "n/a":
             for node in nodes:
                 nodelist.append([float(node.lon), float(node.lat)])
-                unfiltered[way.tags.get("name")] = nodelist
-
+                unfiltered[name] = [nodelist, street]
+    
     output = []
     for k, v in unfiltered.items():
-        mean = np.mean(v, axis=0)
+        mean = np.mean(v[0], axis=0)
+        street = v[1]
         if lon != None and lat != None:
             lon = np.float64(lon)
             lat = np.float64(lat)
-            distance = Haversine(lon, lat, mean[0], mean[1])
-            output.append({"name": k, "dist": distance, "lon": lon, "lat": lat})
+            distance = haversine(lon, lat, mean[0], mean[1])
+            output.append({"name": k, "addr": street, "dist": distance, "lon": lon, "lat": lat})
 
     sorted_output = sorted(output, key=lambda k: k['dist'])
     context = {"hospitals": sorted_output}

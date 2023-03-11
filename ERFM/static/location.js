@@ -12,5 +12,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
     };
     xhr.send();
     
-    initializeMap(lon, lat);
+    var map = initializeMap(lon, lat);
+    addMarkerToMap(lon, lat, map)
 });
