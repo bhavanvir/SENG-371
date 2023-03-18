@@ -7,10 +7,13 @@
 <div class="card" style="width: 22rem;">
     <ul class="list-group list-group-flush" style="max-height: calc(100vh - 10px); overflow-y: auto;">
         {% for hospital in hospitals %}
+        <div id="clickable-div {{hospital.name}}" onclick="hospitalPopUpFunction('{{ hospital.name }}')">
             <li class="list-group-item">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
+        </div>
         {% empty %}
             <li class="list-group-item d-flex align-items-center justify-content-center ">Loading...</li>
         {% endfor %}
+        <script src="{% static 'hospital.js' %}"></script>
     </ul>
 </div>
 {% endblock %}
