@@ -7,7 +7,7 @@
 <div class="card" style="width: 22rem;">
     <ul class="list-group list-group-flush" style="max-height: calc(100vh - 10px); overflow-y: auto;">
         {% for hospital in hospitals %}
-        <div id="clickable-div {{hospital.name}}" onclick="hospitalPopUpFunction('{{ hospital.name }}')">
+        <div id="clickable-div-{{hospital.name}}" onclick="hospitalPopUpFunction('{{ hospital.name }}'); adjustMap('{{hospital.lon}}', '{{hospital.lat}}')">
             <li class="list-group-item">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
         </div>
         {% empty %}
