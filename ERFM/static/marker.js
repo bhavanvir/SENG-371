@@ -1,4 +1,10 @@
 function addMarkerToMap(lon, lat, map) {
+
+    layers = map.getAllLayers();
+    if(layers.length >= 2){
+        map.removeLayer(layers[2]);
+    }
+
     // Add a marker to the map
     var marker = new ol.Feature({
         geometry: new ol.geom.Point(
