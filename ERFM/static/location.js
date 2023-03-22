@@ -36,3 +36,10 @@ function adjustMap(lon, lat){
       }));
     addMarkerToMap(lon, lat, map);
 }
+
+function goHome(){
+    map.setView(new ol.View({
+        center: ol.proj.fromLonLat([homeLon, homeLat]),
+        zoom: 17
+      }));
+}
