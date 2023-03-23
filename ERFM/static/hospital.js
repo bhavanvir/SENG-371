@@ -29,14 +29,37 @@ function hospitalPopUpFunction(hospital) {
     var peopleAheadEmergency = document.createTextNode("People ahead of you: " + randomPeople2);
 
     var nonEmergencyIncrButton = document.createElement('button');
+   
     nonEmergencyIncrButton.innerText = '+';
     nonEmergencyIncrButton.classList.add('btn', 'btn-success', 'mx-1', 'py-0');
     nonEmergencyIncrButton.style.width = "50px";
     nonEmergencyIncrButton.addEventListener('click', function() {
         randomPeople1 += 1;
         peopleAheadNonEmergency.nodeValue = "People ahead of you: " + randomPeople1;
+       
+    });
+
+    var nonEmergencyIncrButton2 = document.createElement('button');
+    let setTime = randomHour1;
+    let setMins = randomMinute1;
+    let num =0;
+    var final;
+    nonEmergencyIncrButton.innerText = '+';
+    nonEmergencyIncrButton.classList.add('btn', 'btn-success', 'mx-1', 'py-0');
+    nonEmergencyIncrButton.style.width = "50px";
+    nonEmergencyIncrButton.addEventListener('click', function() {
+        num += 1;
+        if(final< 60){
+           final= setMins+num*10;
+        }
+        if(final>60){
+            setTime +=1;
+        }
+        nonEmergencyWait.nodeValue = "Non-emergency wait: " + setTime + " hr " + final + " min";
+       
     });
     
+
     var emergencyIncrButton = document.createElement('button');
     emergencyIncrButton.innerText = '+';
     emergencyIncrButton.classList.add('btn', 'btn-success', 'mx-1', 'py-0');
@@ -68,12 +91,14 @@ function hospitalPopUpFunction(hospital) {
     li2Element.appendChild(document.createElement("br"));
     li2Element.appendChild(peopleAheadNonEmergency);
     li2Element.appendChild(nonEmergencyIncrButton);
+    li2Element.appendChild(nonEmergencyIncrButton2);
     li2Element.appendChild(nonEmergencyDecButton);
     li2Element.appendChild(document.createElement("br"));
     li2Element.appendChild(document.createElement("br"));
     li2Element.appendChild(emergencyWait);
     li2Element.appendChild(document.createElement("br"));
     li2Element.appendChild(peopleAheadEmergency);
+    li2Element.appendChild(nonEmergencyIncrButton2);
     li2Element.appendChild(emergencyIncrButton);
     li2Element.appendChild(emergencyDecButton);
     
