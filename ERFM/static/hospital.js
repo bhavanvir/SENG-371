@@ -99,43 +99,92 @@ function hospitalPopUpFunction(hospital) {
     nonEmergencyDecButton.style.width = "50px";
     nonEmergencyDecButton.addEventListener('click', function() {
         randomPeople1 = Math.max(randomPeople1 - 1, 0);
-        let num1 = generateNegativeRandomNumber(); 
-        final2 = setMins1 + num1;
+        let num1 = generatePositiveRandomNumber(); 
+        final2 = setMins1 - num1;
         updateTime1();
         peopleAheadNonEmergency.nodeValue = "People ahead of you: " + randomPeople1;
     });
     
-    function generateNegativeRandomNumber() {
-        return Math.floor(Math.random() * -21) - 10;
+    function generatePositiveRandomNumber() {
+        return Math.floor(Math.random() * 21) +10;
       }
     
       function updateTime1() {
         if (final2 < 0) {
           const timePassed = Math.abs(final2) / 60;
-          setTime1 -= Math.min(setTime1, timePassed);
+          if (setTime1 > 0) {
+            setTime1 = Math.max(Math.floor(setTime1 - timePassed), 0);
+          } else {
+            setTime1 = 0;
+            setMins1 = 0;
+          }
           setMins1 = Math.abs(final2) % 60;
           if (setMins1 < 0) {
             setTime1 -= 1;
             setMins1 += 60;
           }
         } else {
-          setMins1 = final2 % 60;
           setTime1 += Math.floor(final2 / 60);
+          setMins1 = final2 % 60;
+          setTime1 = Math.max(setTime1, 0); // Ensure setTime1 is never negative
+          if (setTime1 === 0 && num1 > setMins1) {
+            setMins1 = 0;
+          }
         }
         setTime1 = Math.floor(setTime1); // round down to nearest integer
         setMins1 = Math.floor(setMins1); // round down to nearest integer
         nonEmergencyWait.nodeValue = "Non-emergency wait: " + Math.max(setTime1, 0) + " hr " + setMins1 + " min";
       }
       
+      
+      
     //emergence decrease
+    let setTime2 = randomHour2;
+    let setMins2= randomMinute2;
+    let final3;
     var emergencyDecButton = document.createElement('button');
     emergencyDecButton.innerText = '-';
     emergencyDecButton.classList.add('btn', 'btn-danger', 'mx-1', 'py-0');
     emergencyDecButton.style.width = "50px";
     emergencyDecButton.addEventListener('click', function() {
         randomPeople2 = Math.max(randomPeople2 - 1, 0);
+        let num2 = generatePositiveRandomNumbers(); 
+        final3 = setMins2 - num2;
+        updateTime2();
         peopleAheadEmergency.nodeValue = "People ahead of you: " + randomPeople2;
     });
+   
+    function generatePositiveRandomNumbers() {
+      return Math.floor(Math.random() * 21) +10; //
+    }
+  
+    function updateTime2() {
+      if (final3 < 0) {
+        const timePassed = Math.abs(final3) / 60;
+        if (setTime2 > 0) {
+          setTime2 = Math.max(Math.floor(setTime2 - timePassed), 0);
+        } else {
+          setTime2 = 0;
+          setMins2 = 0;
+        }
+        setMins2 = Math.abs(final3) % 60;
+        if (setMins2 < 0) {
+          setTime2 -= 1;
+          setMins2 += 60;
+        }
+      } else {
+        setTime2 += Math.floor(final3 / 60);
+        setMins2 = final3 % 60;
+        setTime2 = Math.max(setTime2, 0); // Ensure setTime1 is never negative
+        if (setTime2 === 0 && num1 > setMins2) {
+          setMins2 = 0;
+        }
+      }
+      setTime2 = Math.floor(setTime2); // round down to nearest integer
+      setMins2 = Math.floor(setMins2); // round down to nearest integer
+      emergencyWait.nodeValue = "Emergency wait: " + Math.max(setTime2, 0) + " hr " + setMins2 + " min";
+    }
+    
 
     li2Element.appendChild(nonEmergencyWait);
     li2Element.appendChild(document.createElement("br"));
