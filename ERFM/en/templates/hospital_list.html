@@ -4,16 +4,27 @@
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
 {% block content %}
-<div class="card" style="width: 22rem;">
+<div class="d-flex flex-column">
+  <div class="card" style="width: 22rem;">
     <ul class="list-group list-group-flush" style="max-height: calc(100vh - 10px); overflow-y: auto;">
-        {% for hospital in hospitals %}
-        <div id="clickable-div {{hospital.name}}" onclick="hospitalPopUpFunction('{{ hospital.name }}')">
-            <li class="list-group-item">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
-        </div>
-        {% empty %}
-            <li class="list-group-item d-flex align-items-center justify-content-center ">Loading...</li>
-        {% endfor %}
-        <script src="{% static 'hospital.js' %}"></script>
+      {% for hospital in hospitals %}
+      <div id="clickable-div-{{hospital.name}}" onclick="hospitalPopUpFunction('{{ hospital.name }}'); adjustMap('{{hospital.lon}}', '{{hospital.lat}}')">
+        <li class="list-group-item">{{ hospital.name }} <br> <b>{{ hospital.addr }} - {{ hospital.dist }} km</b></li>
+      </div>
+      {% empty %}
+      <li class="list-group-item d-flex align-items-center justify-content-center ">Loading...</li>
+      {% endfor %}
+      <script src="{% static 'hospital.js' %}"></script>
     </ul>
+  </div>
+  <div class="mt-auto d-flex justify-content-center align-items-center">
+    <button class="btn btn-primary btn-fixed-size" onclick="goHome()">Home</button>
+  </div>
 </div>
+
+<style>
+  .btn-fixed-size {
+    width: 100%;
+  }
+</style>
 {% endblock %}
