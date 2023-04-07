@@ -22,7 +22,7 @@ function hospitalPopUpFunction(hospital) {
     var randomMinute2 = Math.floor(Math.random() * 60);
     var randomPeople1 = Math.floor(Math.random() * 50);
     var randomPeople2 = Math.floor(Math.random() * 50);
-    //var randomNonEmergence = Math.floor(Math.random() * 21) + 10;;
+    //var randomNonEmergence = Math.floor(Math.random() * 21) + 10;;  // not sure if its a global variables
 
     var nonEmergencyWait = document.createTextNode("Non-emergency wait: " + randomHour1 + " hr " + randomMinute1 + " min");
     var emergencyWait = document.createTextNode("Emergency wait: " + randomHour2 + " hr " + randomMinute2 + " min");
