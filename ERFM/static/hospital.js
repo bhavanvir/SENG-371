@@ -22,14 +22,13 @@ function hospitalPopUpFunction(hospital) {
     var randomMinute2 = Math.floor(Math.random() * 60);
     var randomPeople1 = Math.floor(Math.random() * 50);
     var randomPeople2 = Math.floor(Math.random() * 50);
-    //var randomNonEmergence = Math.floor(Math.random() * 21) + 10;;
 
     var nonEmergencyWait = document.createTextNode("Non-emergency wait: " + randomHour1 + " hr " + randomMinute1 + " min");
     var emergencyWait = document.createTextNode("Emergency wait: " + randomHour2 + " hr " + randomMinute2 + " min");
     var peopleAheadNonEmergency = document.createTextNode("People ahead of you: " + randomPeople1);
     var peopleAheadEmergency = document.createTextNode("People ahead of you: " + randomPeople2);
     
-    //Non-emergence
+    //Non-emergency increase
     let setTime = randomHour1;
     let setMins = randomMinute1;
     let final;
@@ -39,7 +38,8 @@ function hospitalPopUpFunction(hospital) {
     nonEmergencyIncrButton.style.width = "50px";
     nonEmergencyIncrButton.addEventListener('click', function() {
       randomPeople1 += 1;
-      let num = generateRandomNumber(); // use generateRandomNumber() to set num
+      // Use generateRandomNumber() to set num
+      let num = generateRandomNumber(); 
       final = setMins + num ;
       updateTime();
       peopleAheadNonEmergency.nodeValue = "People ahead of you: " + randomPeople1;
@@ -59,7 +59,7 @@ function hospitalPopUpFunction(hospital) {
       nonEmergencyWait.nodeValue = "Non-emergency wait: " + setTime + " hr " + setMins + " min";
     }
     
-    //Emergence
+    // Emergency increase
     let setTimes = randomHour2;
     let setMinus = randomMinute2;
     let final_value;
@@ -69,27 +69,30 @@ function hospitalPopUpFunction(hospital) {
     emergencyIncrButton.style.width = "50px";
     emergencyIncrButton.addEventListener('click', function() {
         randomPeople2 += 1;
-        let nums = generateRandomTimes(); // use generateRandomNumber() to set num
+        // Use generateRandomNumber() to set num
+        let nums = generateRandomTimes(); 
         final_value = setMinus + nums ;
         updateTimes();
         peopleAheadEmergency.nodeValue = "People ahead of you: " + randomPeople2;
     });
     
-    function generateRandomTimes() {   //generate simulation between 40 to 90 mins
+    function generateRandomTimes() {   
+        // Generate simulation between 40 to 90 mins
         return Math.floor(Math.random() * 51) + 40;
       }
       
-    function updateTimes() {  // check the time by 60 if above then add one to the hrs
-        if (final_value >= 60) {
-          setTimes += Math.floor(final_value/60);
-          setMinus = final_value % 60;
-        } else {
-          setMinus = final_value;
-        }
-        emergencyWait.nodeValue = "Emergency wait: " + setTimes+ " hr " + setMinus + " min";
+    function updateTimes() {  
+      // Check the time by 60 if above then add one to the hrs
+      if (final_value >= 60) {
+        setTimes += Math.floor(final_value/60);
+        setMinus = final_value % 60;
+      } else {
+        setMinus = final_value;
+      }
+      emergencyWait.nodeValue = "Emergency wait: " + setTimes+ " hr " + setMinus + " min";
     }
     
-    //Non_emergence decrease
+    // Non-emergency decrease
     let setTime1 = randomHour1;
     let setMins1= randomMinute1;
     let final2;
@@ -126,19 +129,19 @@ function hospitalPopUpFunction(hospital) {
         } else {
           setTime1 += Math.floor(final2 / 60);
           setMins1 = final2 % 60;
-          setTime1 = Math.max(setTime1, 0); // Ensure setTime1 is never negative
+          setTime1 = Math.max(setTime1, 0); 
+          // Ensure setTime1 is never negative
           if (setTime1 === 0 && num1 > setMins1) {
             setMins1 = 0;
           }
         }
-        setTime1 = Math.floor(setTime1); // round down to nearest integer
-        setMins1 = Math.floor(setMins1); // round down to nearest integer
+        // round down to nearest integer
+        setTime1 = Math.floor(setTime1); 
+        setMins1 = Math.floor(setMins1);
         nonEmergencyWait.nodeValue = "Non-emergency wait: " + Math.max(setTime1, 0) + " hr " + setMins1 + " min";
       }
       
-      
-      
-    //emergence decrease
+    //Emergency decrease
     let setTime2 = randomHour2;
     let setMins2= randomMinute2;
     let final3;
@@ -155,7 +158,7 @@ function hospitalPopUpFunction(hospital) {
     });
    
     function generatePositiveRandomNumbers() {
-      return Math.floor(Math.random() * 21) +10; //
+      return Math.floor(Math.random() * 21) +10;
     }
   
     function updateTime2() {
@@ -175,7 +178,8 @@ function hospitalPopUpFunction(hospital) {
       } else {
         setTime2 += Math.floor(final3 / 60);
         setMins2 = final3 % 60;
-        setTime2 = Math.max(setTime2, 0); // Ensure setTime1 is never negative
+        setTime2 = Math.max(setTime2, 0); 
+        // Ensure setTime1 is never negative
         if (setTime2 === 0 && num1 > setMins2) {
           setMins2 = 0;
         }
@@ -184,7 +188,6 @@ function hospitalPopUpFunction(hospital) {
       setMins2 = Math.floor(setMins2); // round down to nearest integer
       emergencyWait.nodeValue = "Emergency wait: " + Math.max(setTime2, 0) + " hr " + setMins2 + " min";
     }
-    
 
     li2Element.appendChild(nonEmergencyWait);
     li2Element.appendChild(document.createElement("br"));
