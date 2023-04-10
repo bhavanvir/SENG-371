@@ -10,6 +10,8 @@ Introduces problems and solutions of long-term software maintenance/evolution an
 
 [Assignment 3](https://github.com/bhavanvir/SENG-371/wiki/Assignment-3)
 
+[Assignment 4](https://github.com/bhavanvir/SENG-371/wiki/Assignment-4)
+
 ## Installation 
 ```
 Using the package manager pip to install all external modules:
