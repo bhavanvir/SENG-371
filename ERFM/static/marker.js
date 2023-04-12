@@ -1,4 +1,4 @@
-function addMarkerToMap(lon, lat, map) {
+function addMarkerToMap(lon, lat, map, markerSource) {
 
     layers = map.getAllLayers();
     if(layers.length >= 2){
@@ -18,7 +18,7 @@ function addMarkerToMap(lon, lat, map) {
         }),
         style: new ol.style.Style({
             image: new ol.style.Icon({
-                src: 'https://openlayers.org/en/latest/examples/data/geolocation_marker.png'
+                src: markerSource
             })
         }),
         zIndex: 1
