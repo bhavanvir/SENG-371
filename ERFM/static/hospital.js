@@ -12,6 +12,24 @@ function hospitalPopUpFunction(hospital) {
     boldElement.appendChild(texthere);
     li1Element.appendChild(boldElement);
 
+    // close button for hospital box info 
+
+    var closeButton = document.createElement('button');
+    closeButton.innerText = 'x';
+    closeButton.classList.add('btn', 'btn-danger', 'mx-1', 'py-0');
+    closeButton.style.width = "34px";
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "5px";
+    closeButton.style.right = "0";
+    
+    closeButton.addEventListener('click', function() {
+        
+        cardElement.style.display = "none";
+
+  });
+
+    li1Element.appendChild(closeButton);
+
     // Create second list item with non-emergency wait, emergency wait, and people ahead of you
     var li2Element = document.createElement('li');
     li2Element.classList.add('list-group-item');
