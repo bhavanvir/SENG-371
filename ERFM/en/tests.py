@@ -22,3 +22,13 @@ class TestPageTitle(TestCase):
         self.assertContains(response, "Emergency Room Flow Manager")
         content = str(response.content, 'utf-8')
         self.assertIn('<title>Emergency Room Flow Manager</title>', content)
+
+class TestMapExists(TestCase):
+    def setUp(self):
+        self.client = Client()
+    
+    def test_map_exists(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        content = str(response.content, 'utf-8')
+        self.assertIn('<div id="map"></div>', content)
