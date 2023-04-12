@@ -24,8 +24,8 @@ function hospitalPopUpFunction(hospital) {
     var randomHour2 = Math.floor(Math.random() * 4);
     var randomMinute1 = Math.floor(Math.random() * 60);
     var randomMinute2 = Math.floor(Math.random() * 60);
-    var randomPeople1 = Math.floor(Math.random() * 20);
-    var randomPeople2 = Math.floor(Math.random() * 20);
+    var randomPeople1 = Math.floor(Math.random() * 30);
+    var randomPeople2 = Math.floor(Math.random() * 30);
 
     var nonEmergencyWait = document.createTextNode("Non-emergency wait: " + randomHour1 + " hr " + randomMinute1 + " min");
     var emergencyWait = document.createTextNode("Emergency wait: " + randomHour2 + " hr " + randomMinute2 + " min");
