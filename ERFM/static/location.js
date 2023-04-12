@@ -18,7 +18,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
     
     map = initializeMap(lon, lat);
     //console.log(map.size);
-    addMarkerToMap(lon, lat, map);
+    homeMarker = 'https://openlayers.org/en/latest/examples/data/geolocation_marker.png'
+    addMarkerToMap(lon, lat, map, homeMarker);
     //map.getView().setCenter(ol.proj.fromLonLat(['-123.3290759', '48.4337391']));
     homeLon = lon;
     homeLat = lat;
@@ -34,7 +35,8 @@ function adjustMap(lon, lat){
         center: ol.proj.fromLonLat([lon, lat]),
         zoom: 17
       }));
-    addMarkerToMap(lon, lat, map);
+    hospitalMarker = 'https://media.discordapp.net/attachments/614629290889314455/1095659099007492197/hospital-icon.png'
+    addMarkerToMap(lon, lat, map, hospitalMarker);
 }
 
 function goHome(){
