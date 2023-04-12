@@ -140,7 +140,7 @@ function hospitalPopUpFunction(hospital) {
         nonEmergencyWait.nodeValue = "Non-emergency wait: " + Math.max(setTime1, 0) + " hr " + setMins1 + " min";
         return;
       }
-      
+
       if (final2 < 0) {
         const timePassed = Math.abs(final2) / 60;
         if (setTime1 > 0) {
@@ -184,6 +184,7 @@ function hospitalPopUpFunction(hospital) {
         updateTime2();
         peopleAheadEmergency.nodeValue = "People ahead of you: " + randomPeople2;
     });
+
    
     function updateTime2() {
       if (randomPeople2 === 0) {// this statement ensure if people is 0, then it will stay at 0
